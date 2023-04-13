@@ -105,13 +105,24 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
                         binding.recyclerSearch.setVisibility(View.GONE);
                         mealsList.clear();
                         Toast.makeText(getApplicationContext(), "No Meals Found", Toast.LENGTH_SHORT).show();
-                        adapter.notifyDataSetChanged();
+                        try {
+
+                            if (adapter != null) {
+                                adapter.notifyDataSetChanged();
+                            }
+                        } catch (NullPointerException e) {}
                     }
                 } catch (NullPointerException e) {
 
                     binding.tvSearchResult.setVisibility(View.GONE);
                     binding.recyclerSearch.setVisibility(View.GONE);
-                    adapter.notifyDataSetChanged();
+
+                    try {
+
+                        if (adapter != null) {
+                            adapter.notifyDataSetChanged();
+                        }
+                    } catch (NullPointerException ex) {}
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
@@ -181,7 +192,12 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         binding.recyclerSearch.setHasFixedSize(true);
         binding.recyclerSearch.setClipToPadding(true);
         binding.recyclerSearch.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        try {
+
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
+            }
+        } catch (NullPointerException e) {}
 
         adapter.setClickListenerMealByCategory((view, position) -> {
 
@@ -252,6 +268,9 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @Override
     public void onErrorLoading(String message) {
 
-        Utils.showDialogMessage(this, "Error ", message);
+        if (getApplicationContext() != null) {
+            Utils.showDialogMessage(getApplicationContext(), "Error ", message);
+        }
+
     }
 }

@@ -118,7 +118,8 @@ public class CategoryFragment extends Fragment implements CategoryView {
 
     @Override
     public void onErrorLoading(String message) {
-
-        Utils.showDialogMessage(getContext(), "Error ", message);
+        if (getContext() != null) {
+            Utils.showDialogMessage(getContext(), "Error ", message);
+        }
     }
 }

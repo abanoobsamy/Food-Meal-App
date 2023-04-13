@@ -39,7 +39,12 @@ public class RecyclerMealByCategoryAdapter
     public RecyclerMealByCategoryAdapter(List<Meals.Meal> meals, Context context) {
         this.meals = meals;
         this.context = context;
-        mViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(MealsViewModel.class);
+
+        try {
+            if ((ViewModelStoreOwner) context != null) {
+                mViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(MealsViewModel.class);
+            }
+        } catch (NullPointerException e) {}
     }
 
     public void setClickListenerMealByCategory(ClickListenerMealByCategory clickListener) {
