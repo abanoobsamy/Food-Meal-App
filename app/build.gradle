@@ -6,7 +6,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.abanoob_samy.foodmealapp"
+        applicationId "com.abanoob_samy.food_meal_app"
         minSdk 21
         targetSdk 33
         versionCode 1
